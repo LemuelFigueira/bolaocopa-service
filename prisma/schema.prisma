@@ -18,7 +18,7 @@ model Pool {
   cdPool    String   @id @default(cuid())
   nmPool    String
   hsPool    String   @unique
-  dtCriacao DateTime @default(now())
+  dtCreated DateTime @default(now())
   cdOwner   String?
 
   user         User?         @relation(fields: [cdOwner], references: [cdUser])
@@ -31,7 +31,7 @@ model User {
   email     String   @unique
   googleId  String?  @unique
   avatarUrl String?
-  createdAt DateTime @default(now())
+  dtCreated DateTime @default(now())
 
   participatingAt Participant[]
   ownPools        Pool[]
@@ -64,7 +64,7 @@ model Guess {
 
   firstTeamPoints  Int
   secondTeamPoints Int
-  createdAt        DateTime @default(now())
+  dtCreated        DateTime @default(now())
   cdGame           String
   cdParticipant    String
 
