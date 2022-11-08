@@ -19,4 +19,57 @@ model Pool {
   nmPool    String
   hsPool    String   @unique
   dtCriacao DateTime @default(now())
+  cdOwner   String?
+
+  user         User?         @relation(fields: [cdOwner], references: [cdUser])
+  participants Participant[]
+}
+
+model User {
+  cdUser    String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  googleId  String?  @unique
+  avatarUrl String?
+  createdAt DateTime @default(now())
+
+  participatingAt Participant[]
+  ownPools        Pool[]
+}
+
+model Participant {
+  cdParticipant String @id @default(cuid())
+  cdUser        String
+  cdPool        String
+
+  guesses Guess[]
+  user    User    @relation(fields: [cdUser], references: [cdUser])
+  pool    Pool    @relation(fields: [cdPool], references: [cdPool])
+
+  @@unique([cdUser, cdPool])
+}
+
+model Game {
+  cdGame String   @id @default(cuid())
+  date   DateTime
+
+  firstTeamCountryCode  String
+  secondTeamCountryCode String
+
+  guesses Guess[]
+}
+
+model Guess {
+  cdGuess String @id @default(cuid())
+
+  firstTeamPoints  Int
+  secondTeamPoints Int
+  createdAt        DateTime @default(now())
+  cdGame           String
+  cdParticipant    String
+
+  participant Participant @relation(fields: [cdParticipant], references: [cdParticipant])
+  game        Game        @relation(fields: [cdGame], references: [cdGame])
+
+  @@unique([cdParticipant, cdGame])
 }
