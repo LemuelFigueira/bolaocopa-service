@@ -1,8 +1,9 @@
 import { app } from "@src/server";
 import request from 'supertest';
 
-import { prisma } from "@libs/prisma";
+import { prisma } from '@libs/prisma';
 import { Pool } from "@prisma/client";
+import { UUID } from "@src/libs/uuid";
 
 afterAll(async () => {
   prisma.$disconnect();
@@ -11,24 +12,24 @@ afterAll(async () => {
 describe("Rota '/pools' ", () => {
   const mockedPool: Pool[] = [
     {
-      cdPool: '1',
+      cdPool: new UUID().value,
       nmPool: 'Pool 1',
       hsPool: 'Pool1',
-      dtCriacao: new Date(),
+      dtCreated: new Date(),
       cdOwner: 'cla8g13oa0000twkw4uvt9m70',
     },
     {
-      cdPool: '2',
+      cdPool: new UUID().value,
       nmPool: 'Pool 2',
       hsPool: 'Pool2',
-      dtCriacao: new Date(),
+      dtCreated: new Date(),
       cdOwner: 'cla8g13oa0000twkw4uvt9m70',
     },
     {
-      cdPool: '3',
+      cdPool: new UUID().value,
       nmPool: 'Pool 3',
       hsPool: 'Pool3',
-      dtCriacao: new Date(),
+      dtCreated: new Date(),
       cdOwner: 'cla8g13oa0000twkw4uvt9m70',
     }
   ]
