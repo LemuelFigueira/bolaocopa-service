@@ -11,5 +11,6 @@ module.exports = {
     "@errors/*": ["src/errors/*"],
     "@controllers/*": ["src/controllers/*"],
     "@services/*": ["src/services/*"],
+    "@libs/*": ["src/libs/*"],
   }),
 }
