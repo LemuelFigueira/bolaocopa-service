@@ -24,7 +24,7 @@ export class PoolService implements IPoolService {
       }
     })
 
-    if (!result || result === null) throw new NotFoundException("Pool not found")
+    if (!result || result === null) throw new NotFoundException(`Pool with id ${cdPool} not found`)
 
     return result;
   }
@@ -48,7 +48,7 @@ export class PoolService implements IPoolService {
 
     try {
       if (before) {
-        pool.dtCriacao = before.dtCriacao
+        pool.dtCreated = before.dtCreated
         pool.hsPool = before.hsPool
 
         return this.prisma.pool.update({
@@ -64,7 +64,7 @@ export class PoolService implements IPoolService {
   }
 
   async buscarQuantidadeDePools(): Promise<number> {
-    return this.prisma.pool.count();
+    return await this.prisma.pool.count();
   }
 
 }
