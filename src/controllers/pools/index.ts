@@ -3,7 +3,7 @@ import express, { Router } from 'express';
 
 const poolsRoutes = Router();
 
-import prisma from 'prisma/client';
+import { prisma } from '@libs/prisma';
 
 poolsRoutes.get('/health', async (request, response) => {
   response.send({ status: "Server is running" });
